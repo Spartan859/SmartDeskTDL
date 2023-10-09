@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/task_set/task_set",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/task_set"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationStyle": "custom"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
+    "t-cell": "tdesign-miniprogram/cell/cell"
+  }
+}

@@ -1,0 +1,8 @@
+/* pages/task_set/task_set.wxss */
+.panel-item {
+  margin-bottom: 32rpx;
+}
+
+.panel-item::after {
+  border: 0;
+}
