@@ -2,28 +2,42 @@
 <view class="block">
   <t-navbar title="设置任务" t-class-title="nav-title" left-arrow bind:go-back="handleBack"/>
 </view>
-<t-input label="任务名称" placeholder="请输入文字"></t-input>
+<t-input label="任务名称" placeholder="请输入任务名称" bind:blur="bindtaskNameSet"></t-input>
 <t-cell
-  title="选择日期"
+  title="选择日期时间"
   hover
-  note="{{dateText || ''}}"
+  note="{{datetimeText}}"
   arrow
-  data-mode="date"
+  data-mode="datetime"
   bindtap="showPicker"
-  class="test"
   t-class="panel-item"
 />
 
-<!-- 年月日 -->
+<!-- 年月日时分 -->
 <t-date-time-picker
-  title="选择日期"
-  visible="{{dateVisible}}"
-  mode="date"
-  defaultValue="{{date}}"
-  format="YYYY-MM-DD"
+  title="选择日期和时间"
+  visible="{{datetimeVisible}}"
+  mode="minute"
+  value="{{minute}}"
+  format="YYYY-MM-DD HH:mm"
   bindchange="onConfirm"
-  bindpick="onColumnChange"
-  bindcancel="hidePicker"
-  start="{{start}}"
-  end="{{end}}"
 />
+<t-cell class="panel-item" title="选择提醒方式" note="{{notifyText}}" bind:click="onNotifyPicker" />
+<t-picker
+  visible="{{notifyVisible}}"
+  value="{{notifyValue}}"
+  data-key="notify"
+  title="选择提醒方式"
+  cancelBtn="取消"
+  confirmBtn="确认"
+  bindchange="onNotifyPickerChange"
+>
+  <t-picker-item options="{{notifyWays}}" />
+</t-picker>
+
+<view class="button-bottom">
+  <t-button theme="primary" size="large" block bind:click="confirmTaskInfo">确认</t-button>
+</view>
+
+
+

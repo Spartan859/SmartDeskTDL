@@ -9,3 +9,4 @@ class todolist_item{
     this.AlarmType=AlarmType;
   }
 }
+module.exports=todolist_item;
