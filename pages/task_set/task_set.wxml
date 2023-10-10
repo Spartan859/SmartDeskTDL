@@ -2,14 +2,14 @@
 <view class="block">
   <t-navbar title="设置任务" t-class-title="nav-title" left-arrow bind:go-back="handleBack"/>
 </view>
-<t-input label="任务名称" placeholder="请输入任务名称" bind:blur="bindtaskNameSet"></t-input>
+<t-input label="任务名称" placeholder="请输入任务名称" value="{{taskName}}" bind:blur="bindtaskNameSet"></t-input>
 <t-cell
   title="选择日期时间"
   hover
   note="{{datetimeText}}"
   arrow
   data-mode="datetime"
-  bindtap="showPicker"
+  bindtap="showTimePicker"
   t-class="panel-item"
 />
 
@@ -19,8 +19,8 @@
   visible="{{datetimeVisible}}"
   mode="minute"
   value="{{minute}}"
-  format="YYYY-MM-DD HH:mm"
-  bindchange="onConfirm"
+  format="YYYY-MM-DD-HH-mm"
+  bindchange="onTimeConfirm"
 />
 <t-cell class="panel-item" title="选择提醒方式" note="{{notifyText}}" bind:click="onNotifyPicker" />
 <t-picker
@@ -36,8 +36,10 @@
 </t-picker>
 
 <view class="button-bottom">
-  <t-button theme="primary" size="large" block bind:click="confirmTaskInfo">确认</t-button>
+  <t-button theme="primary" size="large" block bind:tap="confirmTaskInfo">确认</t-button>
 </view>
+
+<t-toast id="t-toast" />
 
 
 

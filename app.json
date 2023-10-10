@@ -17,7 +17,11 @@
     "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
     "t-picker": "tdesign-miniprogram/picker/picker",
     "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
-     "t-button": "tdesign-miniprogram/button/button"
-   
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-fab": "tdesign-miniprogram/fab/fab",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
+    "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+    "t-icon": "tdesign-miniprogram/icon/icon"
   }
 }

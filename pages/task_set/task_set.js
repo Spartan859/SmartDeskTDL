@@ -1,4 +1,6 @@
 // pages/task_set/task_set.js
+import todolist_item from "../../utils/todolist_item"
+import Toast from 'tdesign-miniprogram/toast/index'
 const app=getApp();
 
 Page({
@@ -9,8 +11,8 @@ Page({
   data: {
     taskName: '',
 
-    mode: '',
-    dateVisible: false,
+    datetimeVisible: false,
+    datetime: '',
     minute: new Date().getTime(), // 支持时间戳传入
 
     notifyVisible: false,
@@ -20,42 +22,49 @@ Page({
         {label: '桌板上升至站立位',value: 2},
         {label: '桌板前后小角度摆动',value: 3},
     ],
+
+    notifyValue: -1,
+    isEditMode: false
   },
 
   onLoad(opt){
-      opt.id=parseInt(opt.id)
-    if(opt.id!=-1){
-        var task_this=app.globalData.todo_list[opt.id];
+    console.log('LD!!!!!!!!!');
+    var tid=parseInt(opt.id)
+    this.setData({isEditMode: tid});
+    console.log(tid)
+    if(tid!=-1){
+        
+        var task_this=app.globalData.todo_list[tid];
         console.log(app.globalData);
         this.setData({
-            taskName: task_this.title
+            taskName: task_this.title,
+            datetime: task_this.DDL,
+            datetimeText: todolist_item.getGoodTime(task_this.DDL),
+            notifyValue: task_this.AlarmType,
+            notifyText: this.data.notifyWays[task_this.AlarmType].label
         })   
     }
   },
-  showPicker(e) {
-    const { mode } = e.currentTarget.dataset;
+  showTimePicker(e) {
     this.setData({
-      mode,
-      [`${mode}Visible`]: true,
+      datetimeVisible: true
     });
   },
-  hidePicker() {
-    const { mode } = this.data;
+  hideTimePicker() {
     this.setData({
-      [`${mode}Visible`]: false,
+      datetimeVisible: false,
     });
   },
-  onConfirm(e) {
+  onTimeConfirm(e) {
     const { value } = e.detail;
-    const { mode } = this.data;
 
     console.log('confirm', value);
 
     this.setData({
-      [mode]: value,
-      [`${mode}Text`]: value,
+      datetime: value,
+      datetimeText: todolist_item.getGoodTime(value),
     });
-    this.hidePicker();
+    this.hideTimePicker();
   },
   bindtaskNameSet(e){
     this.setData({taskName: e.detail.value});
@@ -64,18 +73,42 @@ Page({
       this.setData({notifyVisible: true});
   },
   onNotifyPickerChange(e) {
-    const { key } = e.currentTarget.dataset;
     const { value } = e.detail;
 
     console.log('picker change:', e.detail);
     this.setData({
-      [`${key}Visible`]: false,
-      [`${key}Value`]: value[0],
-      [`${key}Text`]: e.detail.label[0],
+      notifyVisible: false,
+      notifyValue: value[0],
+      notifyText: e.detail.label[0],
     });
-    console.log(this.data.notifyValue);
   },
   confirmTaskInfo(){
-
+    
+    var taskName=this.data.taskName;
+    var datetime=this.data.datetime;
+    var notifyValue=this.data.notifyValue;
+    
+    if(taskName==''){
+      Toast({selector: '#t-toast',message: "请输入任务名称！"});
+      return;
+    }
+    if(datetime==''){
+      Toast({selector: '#t-toast',message: "请选择日期与时间！"});
+      return;
+    } 
+    if(notifyValue==-1){
+      Toast({selector: '#t-toast',message: "请选择提醒方式！"});
+      return;
+    } 
+    if(this.data.isEditMode!=-1){
+      app.globalData.todo_list[this.data.isEditMode].setProperties(this.data.taskName,this.data.datetime,"qwq",this.data.notifyValue);
+    }else{
+      var nid=app.globalData.todo_list.length;
+      app.globalData.todo_list.push(new todolist_item(nid));
+      app.globalData.todo_list[nid].setProperties(this.data.taskName,this.data.datetime,"qwq",this.data.notifyValue);
+    }
+    wx.navigateTo({
+      url: '../index/index',
+    });
   }
 })

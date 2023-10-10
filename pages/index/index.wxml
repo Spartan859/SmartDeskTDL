@@ -1,3 +1,49 @@
 <!--index.wxml-->
-<view class="container" bind:tap="bindViewTap">
+<view class="block">
+  <t-navbar title="主页" t-class-title="nav-title"/>
 </view>
+<t-fab icon="add" bind:click="addTask" aria-label="增加"></t-fab>
+<view class="normal" style="font-size: small;color: red;">
+  （短按标记为完成/未完成，长按修改信息）
+</view>
+<view class="normal" style="font-weight: 1000;">
+未完成任务
+</view>
+
+<t-checkbox-group>
+  <view wx:if="{{TDL[0]==undefined}}" class="normal" style="font-style: italic;">
+    目前没有未完成的任务，快去添加吧
+  </view>
+  <view wx:for="{{TDL}}" wx:key="index" class="card">
+    <t-checkbox
+      id="{{TDL[index].id}}"
+      label="{{TDL[index].title}}"
+      content="{{TDL[index].DDLtext+' '+TDL[index].AlarmTypeText}}"
+      icon="none"
+      borderless
+      bind:tap="onTDLchange"
+      bind:longpress="onEditTask"
+    />
+  </view>
+</t-checkbox-group>
+<view class="normal" style="font-weight: 1000;">
+已完成任务
+</view>
+<t-checkbox-group>
+  <view wx:if="{{CPL[0]==undefined}}" class="normal" style="font-style: italic;">
+    目前没有已完成的任务
+  </view>
+  <view wx:for="{{CPL}}" wx:key="index" class="card card--active">
+    <t-icon name="check" t-class="card__icon" ariaHidden="{{false}}" />
+    <t-checkbox
+      id="{{CPL[index].id}}"
+      label="{{CPL[index].title}}"
+      content="{{CPL[index].DDLtext+' '+CPL[index].AlarmTypeText}}"
+      icon="none"
+      borderless
+      bind:tap="onTDLchange"
+      bind:longpress="onEditTask"
+    />
+  </view>
+</t-checkbox-group>
+
