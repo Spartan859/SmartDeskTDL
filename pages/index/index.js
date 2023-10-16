@@ -14,6 +14,8 @@ Page({
     TDLcp=[]
     CPLcp=[]
     for(var key in app.globalData.todo_list){
+      var deletedx=app.globalData.todo_list[key].deleted;
+      if(deletedx) continue;
       var completedx=app.globalData.todo_list[key].completed;
       if(!completedx) TDLcp.push(app.globalData.todo_list[key]);
       else CPLcp.push(app.globalData.todo_list[key]);
@@ -22,7 +24,7 @@ Page({
     this.setData({TDL:TDLcp,CPL:CPLcp});
   },
   onLoad(){
-    this.refreshTDLview();
+    
   },
   addTask(){
     wx.navigateTo({
@@ -40,6 +42,15 @@ Page({
     wx.navigateTo({
       url: '../task_set/task_set?id='+tid,
     })
+  },
+  onShow() {
+    this.refreshTDLview();
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      const page = getCurrentPages().pop();
+      this.getTabBar().setData({
+        value: '/' + page.route
+      })
+    }
   }
-
+  
 })

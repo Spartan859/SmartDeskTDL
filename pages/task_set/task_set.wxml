@@ -38,6 +38,9 @@
 <view class="button-bottom">
   <t-button theme="primary" size="large" block bind:tap="confirmTaskInfo">确认</t-button>
 </view>
+<view class="button-bottom">
+  <t-button theme="danger" size="large" block bind:tap="confirmDeleteTask">删除</t-button>
+</view>
 
 <t-toast id="t-toast" />
 

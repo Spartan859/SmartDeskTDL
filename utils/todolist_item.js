@@ -2,6 +2,7 @@ class todolist_item{
   constructor(id){
     this.id=id;
     this.AlarmTypeTextArr=['无提醒','桌板上升后回落','桌板上升至站立位','桌板前后小角度摆动']
+    this.deleted=false;
   }
   static cmp(a,b){
     let ax=a.DDL.split('-'),bx=b.DDL.split('-');
@@ -25,6 +26,20 @@ class todolist_item{
   }
   switchStatus(){
     this.completed^=1;
+  }
+  deleteIt(){
+    this.deleted=true;
+  }
+  reconstruct_by_object(e){
+    this.id=e.id;
+    this.title=e.title;
+    this.DDL=e.DDL;
+    this.AlarmTime=e.AlarmTime;
+    this.AlarmType=e.AlarmType;
+    this.completed=e.completed;
+    this.DDLtext=this.constructor.getGoodTime(e.DDL);
+    this.AlarmTypeText=this.AlarmTypeTextArr[this.AlarmType];
+    this.deleted=e.deleted;
   }
 }
 module.exports=todolist_item;

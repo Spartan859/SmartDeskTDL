@@ -2,8 +2,22 @@
   "pages": [
     "pages/index/index",
     "pages/task_set/task_set",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/timer/timer"
   ],
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/timer/timer",
+        "text": "计时器"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationStyle": "custom"
@@ -22,6 +36,8 @@
     "t-toast": "tdesign-miniprogram/toast/toast",
     "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
     "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
-    "t-icon": "tdesign-miniprogram/icon/icon"
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
+    "t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item"
   }
 }

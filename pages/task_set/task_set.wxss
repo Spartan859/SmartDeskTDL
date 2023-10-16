@@ -5,4 +5,5 @@
 
   .button-bottom {
     margin: 0 32rpx;
+    margin-top: 10px;
   }

@@ -107,8 +107,25 @@ Page({
       app.globalData.todo_list.push(new todolist_item(nid));
       app.globalData.todo_list[nid].setProperties(this.data.taskName,this.data.datetime,"qwq",this.data.notifyValue);
     }
-    wx.navigateTo({
-      url: '../index/index',
-    });
+    wx.setStorageSync('todo_list', app.globalData.todo_list);
+    wx.navigateBack();
+  },
+  confirmDeleteTask(){
+    var tid=this.data.isEditMode;
+    if(tid!=-1){
+      wx.showModal({
+        title: '确认删除？',
+        content: '删除任务后不可找回',
+        complete: (res) => {
+          if (res.confirm) {
+            app.globalData.todo_list[tid].deleteIt();
+            wx.setStorageSync('todo_list', app.globalData.todo_list);
+            wx.navigateBack();
+          }
+        }
+      })
+      return;
+    }
+    wx.navigateBack();
   }
 })

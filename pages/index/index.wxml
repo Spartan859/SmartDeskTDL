@@ -2,7 +2,7 @@
 <view class="block">
   <t-navbar title="主页" t-class-title="nav-title"/>
 </view>
-<t-fab icon="add" bind:click="addTask" aria-label="增加"></t-fab>
+<t-fab icon="add" bind:click="addTask" aria-label="增加" style="bottom: 64px;position: fixed;z-index: 1;"></t-fab>
 <view class="normal" style="font-size: small;color: red;">
   （短按标记为完成/未完成，长按修改信息）
 </view>
@@ -46,4 +46,5 @@
     />
   </view>
 </t-checkbox-group>
+<view style="height: 100px;"></view>
 
