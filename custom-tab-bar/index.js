@@ -9,7 +9,7 @@ Component({
       icon: 'task-checked',
       label: 'ToDo',
     }, {
-      value: '/pages/timer/timer',
+      value: '/pages/pomodoro/pomodoro',
       icon: 'time',
       label: '番茄钟',
     }]

@@ -1,0 +1,17 @@
+1. 确认并开始(UpdateAndStart)：
+    更改：workDuration,breakDuration,repeatTimes,startTime
+    开始计时：设置变量isMonitoring=true
+2. 监听器：
+    setInterval->1000ms, if isMonitoring, then setData({TimeText: (计算当前距离下一个时间点的时间->转分秒), StatusText: (计算当前所在时段)})
+3. 前端：
+    时分选择框：workDurationPickerValue->workDuration(s) （确认了再更改）
+    时分选择框：breakDurationPickerValue->breakDuration(s) （确认了再更改）
+    确认按钮(UpdateAndStart)
+4. 硬件：
+    目标：去除已有的提醒时间点，增加新的！
+    idea：使用一个全局的hardware_task_count，每次新任务都此变量++
+    实现：update {id} {timepoint} {notifyType}
+         disable {id}
+         enable {id}
+    todo_list: 
+        增加/更新任务：

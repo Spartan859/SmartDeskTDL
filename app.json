@@ -3,7 +3,7 @@
     "pages/index/index",
     "pages/task_set/task_set",
     "pages/logs/logs",
-    "pages/timer/timer"
+    "pages/pomodoro/pomodoro"
   ],
   "tabBar": {
     "custom": true,
@@ -13,7 +13,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/timer/timer",
+        "pagePath": "pages/pomodoro/pomodoro",
         "text": "计时器"
       }
     ]
